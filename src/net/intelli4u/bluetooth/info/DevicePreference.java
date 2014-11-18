@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.intelli4u.bluetooth.info;
 
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.content.Intent;
 import android.preference.Preference;
-import android.view.View;
-import android.view.View.OnClickListener;
 
-public class DevicePreference extends Preference implements OnClickListener {
+public class DevicePreference extends Preference implements Preference.OnPreferenceClickListener {
     private final BluetoothDevice mDevice;
 
     public DevicePreference(Context context, BluetoothDevice device) {
@@ -34,43 +34,49 @@ public class DevicePreference extends Preference implements OnClickListener {
         setSummary(mDevice.getAddress());
         int iconId = getBluetoothClassDrawable(mDevice);
         setIcon(iconId);
+
+        setOnPreferenceClickListener(this);
     }
 
     @Override
-    public void onClick(View v) {
-        // TODO Auto-generated method stub
+    public boolean onPreferenceClick(Preference preference) {
+        Intent intent = new Intent(getContext(), DeviceInfo.class);
+        intent.putExtra(Constants.EXTRA_DEVICE, mDevice);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
+        getContext().startActivity(intent);
+        return true;
     }
 
-    private int getBluetoothClassDrawable(final BluetoothDevice device) {
+    public static int getBluetoothClassDrawable(final BluetoothDevice device) {
         BluetoothClass bluetoothClass = device.getBluetoothClass();
 
         if (bluetoothClass != null) {
             switch (bluetoothClass.getMajorDeviceClass()) {
-                case BluetoothClass.Device.Major.COMPUTER:
-                    return R.drawable.ic_bt_laptop;
-                case BluetoothClass.Device.Major.PHONE:
-                    return R.drawable.ic_bt_cellphone;
-                case BluetoothClass.Device.Major.PERIPHERAL:
-                    switch (bluetoothClass.getDeviceClass()) {
-                        case BluetoothClass.Device.PERIPHERAL_KEYBOARD:
-                        case BluetoothClass.Device.PERIPHERAL_KEYBOARD_POINTING:
-                            return R.drawable.ic_bt_keyboard_hid;
-                        case BluetoothClass.Device.PERIPHERAL_POINTING:
-                            return R.drawable.ic_bt_pointing_hid;
-                        default:
-                            return R.drawable.ic_bt_misc_hid;
-                    }
-                case BluetoothClass.Device.Major.IMAGING:
-                    return R.drawable.ic_bt_imaging;
+            case BluetoothClass.Device.Major.COMPUTER:
+                return R.drawable.ic_bt_laptop;
+            case BluetoothClass.Device.Major.PHONE:
+                return R.drawable.ic_bt_cellphone;
+            case BluetoothClass.Device.Major.PERIPHERAL:
+                switch (bluetoothClass.getDeviceClass()) {
+                case BluetoothClass.Device.PERIPHERAL_KEYBOARD:
+                case BluetoothClass.Device.PERIPHERAL_KEYBOARD_POINTING:
+                    return R.drawable.ic_bt_keyboard_hid;
+                case BluetoothClass.Device.PERIPHERAL_POINTING:
+                    return R.drawable.ic_bt_pointing_hid;
                 default:
-                    break;
+                    return R.drawable.ic_bt_misc_hid;
+                }
+            case BluetoothClass.Device.Major.IMAGING:
+                return R.drawable.ic_bt_imaging;
+            default:
+                break;
             }
-
 
             if (bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_A2DP)) {
                 return R.drawable.ic_bt_headphones_a2dp;
-            } else if (bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_HEADSET)) {
+            } else if (bluetoothClass
+                    .doesClassMatch(BluetoothClass.PROFILE_HEADSET)) {
                 return R.drawable.ic_bt_headset_hfp;
             }
         }

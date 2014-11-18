@@ -27,10 +27,10 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceGroup;
-import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+
+import java.util.Set;
 
 public class MainActivity extends PreferenceActivity {
 
@@ -39,7 +39,6 @@ public class MainActivity extends PreferenceActivity {
     private BluetoothAdapter mAdapter;
     private Preference mMyDevice;
 
-    private boolean mDeviceCategoryAdded;
     private PreferenceGroup mDeviceCategory;
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
@@ -48,10 +47,10 @@ public class MainActivity extends PreferenceActivity {
             String action = intent.getAction();
 
             if (BluetoothDevice.ACTION_FOUND.equals(action)) {
-                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                if (!mDeviceCategoryAdded) {
-                    addDeviceCategory();
-                }
+                BluetoothDevice device = intent
+                        .getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+
+                addDeviceCategory();
                 DevicePreference preference = new DevicePreference(getBaseContext(), device);
                 mDeviceCategory.addPreference(preference);
             }
@@ -71,52 +70,86 @@ public class MainActivity extends PreferenceActivity {
             return;
         }
 
+        IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+        registerReceiver(mReceiver, filter);
+
         mMyDevice = new Preference(this);
         mMyDevice.setIcon(R.drawable.ic_bt_cellphone);
         mMyDevice.setTitle(mAdapter.getName());
         mMyDevice.setSummary(mAdapter.getAddress());
         getPreferenceScreen().addPreference(mMyDevice);
 
-        IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-        registerReceiver(mReceiver, filter);
+        /* get the bonded device */
+        Set<BluetoothDevice> bondedDevices = mAdapter.getBondedDevices();
+        if (bondedDevices != null && bondedDevices.size() > 0) {
+            PreferenceCategory bondedCategory = new PreferenceCategory(this);
+            bondedCategory.setTitle(R.string.bluetooth_bonded_devices);
+            bondedCategory.setEnabled(true);
+            getPreferenceScreen().addPreference(bondedCategory);
+
+            for (BluetoothDevice device : bondedDevices) {
+                DevicePreference preference = new DevicePreference(getBaseContext(), device);
+                bondedCategory.addPreference(preference);
+            }
+        }
 
         if (!mAdapter.isEnabled()) {
             // Show dialog to open the Bluetooth
             // https://developer.android.com/guide/topics/connectivity/bluetooth.html
             Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(intent, 1);
+            startActivity(intent);
         } else if (!mAdapter.isDiscovering()) {
             mAdapter.startDiscovery();
         }
     }
 
     @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        if (mAdapter == null) return;
+    public void onDestroy() {
+        super.onDestroy();
+
+        unregisterReceiver(mReceiver);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+
+        if (mAdapter == null)
+            return false;
 
         boolean isEnabled = mAdapter.getState() == BluetoothAdapter.STATE_ON;
         boolean isDiscovering = mAdapter.isDiscovering();
 
-        int textId = isDiscovering ? R.string.bluetooth_searching_for_devices :
-                R.string.bluetooth_search_for_devices;
+        int textId = isDiscovering ? R.string.bluetooth_searching_for_devices
+                : R.string.bluetooth_search_for_devices;
 
         menu.add(Menu.NONE, MENU_ID_SCAN, 0, textId)
                 .setEnabled(isEnabled && !isDiscovering)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case MENU_ID_SCAN:
+            Intent intent = new Intent(
+                    BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+            startActivity(intent);
+            break;
+        }
+
+        return true;
     }
 
     private void addDeviceCategory() {
-        if (mDeviceCategoryAdded) {
-            mDeviceCategory.removeAll();
-        } else {
-            if (mDeviceCategory == null) {
-                mDeviceCategory = new PreferenceCategory(this);
-            }
+        if (mDeviceCategory == null) {
+            mDeviceCategory = new PreferenceCategory(this);
+
             mDeviceCategory.setTitle(R.string.bluetooth_devices);
             mDeviceCategory.setEnabled(true);
             getPreferenceScreen().addPreference(mDeviceCategory);
-            mDeviceCategoryAdded = true;
         }
     }
 }

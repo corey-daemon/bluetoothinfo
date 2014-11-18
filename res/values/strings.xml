@@ -19,9 +19,90 @@
 <resources>
   <string name="app_name">Bluetooth Info</string>
   <string name="main_string">Bluetooth Info</string>
+  <string name="device_string">Device Info</string>
 
   <string name="bluetooth_search_for_devices">Refresh</string>
   <string name="bluetooth_searching_for_devices">Searching\u2026</string>
 
   <string name="bluetooth_devices">DEVICES</string>
+  <string name="bluetooth_bonded_devices">BONDED DEVICES</string>
+
+  <string name="device_name">Name</string>
+  <string name="device_alias">Alias</string>
+  <string name="device_address">Address</string>
+  <string name="device_type">Type</string>
+  <string name="device_uuid">UUID</string>
+  <string name="device_class">Class</string>
+
+  <string name="class_major">MAJOR CLASS</string>
+  <string name="class_major_misc">Misc</string>
+  <string name="class_major_computer">Computer</string>
+  <string name="class_major_cellphone">Cell Phone</string>
+  <string name="class_major_networking">Networking</string>
+  <string name="class_major_audio_video">Audio/Video</string>
+  <string name="class_major_peripheral">Peripheral</string>
+  <string name="class_major_imaging">Imaging</string>
+  <string name="class_major_wearable">Wearable</string>
+  <string name="class_major_toy">Toy</string>
+  <string name="class_major_health">Health</string>
+  <string name="class_major_uncategorized">Uncategorized</string>
+
+  <string name="class_device">DEVICE CLASS</string>
+  <string name="class_device_misc">Misc</string>
+  <string name="class_device_uncategorized">Uncategorized</string>
+
+  <string name="class_device_keyboard">Keyboard</string>
+  <string name="class_device_keyboard_hid">Hid keyboard</string>
+  <string name="class_device_pointing">Pointing</string>
+
+  <string name="class_device_computer_desktop">Desktop Computer</string>
+  <string name="class_device_computer_server">Server Computer</string>
+  <string name="class_device_computer_laptop">Laptop</string>
+  <string name="class_device_computer_handheld_pc">Handheld PDA</string>
+  <string name="class_device_computer_palm_size_pc">Palm-size PDA</string>
+  <string name="class_device_computer_wearable">Wearable PC</string>
+
+  <string name="class_device_phone_cellular">Cellular</string>
+  <string name="class_device_phone_cordless">cordless</string>
+  <string name="class_device_phone_smart">Smartphone</string>
+  <string name="class_device_phone_modem_or_gateway">Modem/Gateway</string>
+  <string name="class_device_phone_isdn">ISDN</string>
+
+  <string name="class_deivce_audio_video_wearable_headset">Wearable Headset</string>
+  <string name="class_device_audio_video_headset">Headset</string>
+  <string name="class_device_audio_video_handsfree">Handsfree</string>
+  <string name="class_device_audio_vidoo_microphone">Microphone</string>
+  <string name="class_device_audio_video_loudspeaker">Loudspeaker</string>
+  <string name="class_device_audio_video_headphone">Headphones</string>
+  <string name="class_device_audio_video_portable_audio">Portable Audio</string>
+  <string name="class_device_audio_video_car_audio">Car Audio</string>
+  <string name="class_device_audio_video_set_top_box">Set Topbox</string>
+  <string name="class_device_audio_video_hifi_audio">HiFi</string>
+  <string name="class_device_audio_video_vcr">VCR</string>
+  <string name="class_device_audio_video_video_camera">Video Camera</string>
+  <string name="class_device_audio_video_camcorder">Camcorder</string>
+  <string name="class_device_audio_video_video_monitor">Video Monitor</string>
+  <string name="class_device_audio_video_video_display_and_loudspeaker">Video Display and Loudspeaker</string>
+  <string name="class_device_audio_video_video_conference">Video Conference</string>
+  <string name="class_device_audio_video_gaming_toy">Gaming Toy</string>
+
+  <string name="class_device_wearable_wrist_watch">Wrist Watch</string>
+  <string name="class_device_wearable_pager">Pager</string>
+  <string name="class_device_wearable_jacket">Jacket</string>
+  <string name="class_device_wearable_helmet">Helmet</string>
+  <string name="class_device_wearable_glasses">Glasses</string>
+
+  <string name="class_device_toy_robot">Robot</string>
+  <string name="class_device_toy_vehicle">Vehicle</string>
+  <string name="class_device_toy_doll_action_figure">Doll</string>
+  <string name="class_device_toy_controller">Toy Controller</string>
+  <string name="class_device_toy_game">Toy Game</string>
+
+  <string name="class_device_health_blood_pressure">Blood Pressure</string>
+  <string name="class_device_health_thermometer">Thermometer</string>
+  <string name="class_device_health_weighing">Weighing</string>
+  <string name="class_device_health_glucose">Glucose</string>
+  <string name="class_device_health_pulse_oximeter">Pluse Oximeter</string>
+  <string name="class_device_health_pulse_rate">Pluse Rate</string>
+  <string name="class_device_health_data_display">Data Display</string>
 </resources>
