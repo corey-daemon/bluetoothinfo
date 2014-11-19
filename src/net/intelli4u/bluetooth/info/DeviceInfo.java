@@ -45,12 +45,14 @@ public class DeviceInfo extends PreferenceActivity {
             addPreference(-1, R.string.device_address, device.getAddress());
             addPreference(-1, R.string.device_type, R.array.device_type, device.getType());
 
-            ParcelUuid[] uuid = device.getUuids();
-            if (uuid != null) {
-                addPreference(-1, R.string.device_uuid, uuid.toString());
-            }
-
             handleBluetoothClass(device);
+
+            ParcelUuid[] uuids = device.getUuids();
+            if (uuids != null) {
+                for (ParcelUuid uuid : uuids) {
+                    addPreference(-1, R.string.device_uuid, uuid.toString());
+                }
+            }
         }
     }
 
