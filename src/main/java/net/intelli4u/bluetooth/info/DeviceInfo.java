@@ -38,16 +38,17 @@ public class DeviceInfo extends PreferenceActivity {
         Intent intent = getIntent();
         if (intent != null) {
             BluetoothDevice device = intent.getParcelableExtra(Constants.EXTRA_DEVICE);
+            DeviceWrapper wrapper = new DeviceWrapper(device);
 
-            addPreference(DevicePreference.getBluetoothClassDrawable(device),
-                    R.string.device_name, device.getName());
-            addPreference(-1, R.string.device_alias, device.getAlias());
-            addPreference(-1, R.string.device_address, device.getAddress());
+            addPreference(DevicePreference.getBluetoothClassDrawable(wrapper),
+                    R.string.device_name, wrapper.getName());
+            addPreference(-1, R.string.device_alias, wrapper.getAlias());
+            addPreference(-1, R.string.device_address, wrapper.getAddress());
             addPreference(-1, R.string.device_type, R.array.device_type, device.getType());
 
-            handleBluetoothClass(device);
+            handleBluetoothClass(wrapper);
 
-            ParcelUuid[] uuids = device.getUuids();
+            ParcelUuid[] uuids = wrapper.getUuids();
             if (uuids != null) {
                 for (ParcelUuid uuid : uuids) {
                     addPreference(-1, R.string.device_uuid, uuid.toString());
@@ -56,10 +57,10 @@ public class DeviceInfo extends PreferenceActivity {
         }
     }
 
-    private void handleBluetoothClass(final BluetoothDevice device) {
-        BluetoothClass bluetoothClass = device.getBluetoothClass();
+    private void handleBluetoothClass(final DeviceWrapper wrapper) {
+        BluetoothClass bluetoothClass = wrapper.getBluetoothClass();
         if (bluetoothClass != null) {
-            addPreference(DevicePreference.getBluetoothClassDrawable(device),
+            addPreference(DevicePreference.getBluetoothClassDrawable(wrapper),
                     R.string.device_class, "0x" + bluetoothClass.toString());
 
             switch (bluetoothClass.getMajorDeviceClass()) {
@@ -196,23 +197,19 @@ public class DeviceInfo extends PreferenceActivity {
                 break;
             case BluetoothClass.Device.Major.PERIPHERAL:
                 addPreference(-1, R.string.class_major, R.string.class_major_peripheral);
-                switch (bluetoothClass.getDeviceClass()) {
-                case BluetoothClass.Device.PERIPHERAL_KEYBOARD:
+                int deviceClass = bluetoothClass.getDeviceClass();
+                if (deviceClass == ClassWrapper.PERIPHERAL_KEYBOARD) {
                     addPreference(R.drawable.ic_bt_keyboard_hid, R.string.class_device,
                             R.string.class_device_keyboard);
-                    break;
-                case BluetoothClass.Device.PERIPHERAL_KEYBOARD_POINTING:
+                } else if (deviceClass == ClassWrapper.PERIPHERAL_KEYBOARD_POINTING) {
                     addPreference(R.drawable.ic_bt_keyboard_hid, R.string.class_device,
                             R.string.class_device_keyboard_hid);
-                    break;
-                case BluetoothClass.Device.PERIPHERAL_POINTING:
+                } else if (deviceClass == ClassWrapper.PERIPHERAL_POINTING) {
                     addPreference(R.drawable.ic_bt_pointing_hid, R.string.class_device,
                             R.string.class_device_pointing);
-                    break;
-                default:
+                } else {
                     addPreference(R.drawable.ic_bt_misc_hid,
                             R.string.class_device, R.string.class_device_misc);
-                    break;
                 }
                 break;
             case BluetoothClass.Device.Major.IMAGING:

@@ -23,17 +23,19 @@ import android.content.Intent;
 import android.preference.Preference;
 
 public class DevicePreference extends Preference implements Preference.OnPreferenceClickListener {
-    private final BluetoothDevice mDevice;
+    private final DeviceWrapper mDeviceWrapper;
 
     public DevicePreference(Context context, BluetoothDevice device) {
         super(context);
 
-        mDevice = device;
+        mDeviceWrapper = new DeviceWrapper(device);
 
-        setTitle(mDevice.getName());
-        setSummary(mDevice.getAddress());
-        int iconId = getBluetoothClassDrawable(mDevice);
-        setIcon(iconId);
+        setTitle(mDeviceWrapper.getName());
+        setSummary(mDeviceWrapper.getAddress());
+        int iconId = getBluetoothClassDrawable(mDeviceWrapper);
+        if (iconId > 0) {
+            setIcon(iconId);
+        }
 
         setOnPreferenceClickListener(this);
     }
@@ -41,15 +43,15 @@ public class DevicePreference extends Preference implements Preference.OnPrefere
     @Override
     public boolean onPreferenceClick(Preference preference) {
         Intent intent = new Intent(getContext(), DeviceInfo.class);
-        intent.putExtra(Constants.EXTRA_DEVICE, mDevice);
+        intent.putExtra(Constants.EXTRA_DEVICE, mDeviceWrapper.getDevice());
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         getContext().startActivity(intent);
         return true;
     }
 
-    public static int getBluetoothClassDrawable(final BluetoothDevice device) {
-        BluetoothClass bluetoothClass = device.getBluetoothClass();
+    public static int getBluetoothClassDrawable(final DeviceWrapper wrapper) {
+        ClassWrapper bluetoothClass = wrapper.getBluetoothClassWrapper();
 
         if (bluetoothClass != null) {
             switch (bluetoothClass.getMajorDeviceClass()) {
@@ -58,13 +60,13 @@ public class DevicePreference extends Preference implements Preference.OnPrefere
             case BluetoothClass.Device.Major.PHONE:
                 return R.drawable.ic_bt_cellphone;
             case BluetoothClass.Device.Major.PERIPHERAL:
-                switch (bluetoothClass.getDeviceClass()) {
-                case BluetoothClass.Device.PERIPHERAL_KEYBOARD:
-                case BluetoothClass.Device.PERIPHERAL_KEYBOARD_POINTING:
+                int deviceClass = bluetoothClass.getDeviceClass();
+                if (deviceClass == ClassWrapper.PERIPHERAL_KEYBOARD
+                        || deviceClass == ClassWrapper.PERIPHERAL_KEYBOARD_POINTING) {
                     return R.drawable.ic_bt_keyboard_hid;
-                case BluetoothClass.Device.PERIPHERAL_POINTING:
+                } else if (deviceClass == ClassWrapper.PERIPHERAL_POINTING) {
                     return R.drawable.ic_bt_pointing_hid;
-                default:
+                } else {
                     return R.drawable.ic_bt_misc_hid;
                 }
             case BluetoothClass.Device.Major.IMAGING:
@@ -73,10 +75,9 @@ public class DevicePreference extends Preference implements Preference.OnPrefere
                 break;
             }
 
-            if (bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_A2DP)) {
+            if (bluetoothClass.doesClassMatch(ClassWrapper.PROFILE_A2DP)) {
                 return R.drawable.ic_bt_headphones_a2dp;
-            } else if (bluetoothClass
-                    .doesClassMatch(BluetoothClass.PROFILE_HEADSET)) {
+            } else if (bluetoothClass.doesClassMatch(ClassWrapper.PROFILE_HEADSET)) {
                 return R.drawable.ic_bt_headset_hfp;
             }
         }
