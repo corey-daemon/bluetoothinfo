@@ -63,249 +63,236 @@ public class DeviceInfo extends PreferenceActivity {
             addPreference(DevicePreference.getBluetoothClassDrawable(wrapper),
                     R.string.device_class, "0x" + bluetoothClass.toString());
 
+            int mainIconId = -1;
+            int deviceIconId = -1;
+            int mainClassStr = -1;
+            int deviceClassStr = -1;
             switch (bluetoothClass.getMajorDeviceClass()) {
             case BluetoothClass.Device.Major.MISC:
-                addPreference(-1, R.string.class_major, R.string.class_major_misc);
+                mainClassStr = R.string.class_major_misc;
                 break;
             case BluetoothClass.Device.Major.COMPUTER:
-                addPreference(R.drawable.ic_bt_laptop, R.string.class_major,
-                        R.string.class_major_computer);
+                mainIconId = R.drawable.ic_bt_laptop;
+                mainClassStr = R.string.class_major_computer;
                 switch (bluetoothClass.getDeviceClass()) {
                 case BluetoothClass.Device.COMPUTER_UNCATEGORIZED:
-                    addPreference(-1, R.string.class_device, R.string.class_device_uncategorized);
+                    deviceClassStr = R.string.class_device_uncategorized;
                     break;
                 case BluetoothClass.Device.COMPUTER_DESKTOP:
-                    addPreference(-1, R.string.class_device,
-                            R.string.class_device_computer_desktop);
+                    deviceClassStr = R.string.class_device_computer_desktop;
                     break;
                 case BluetoothClass.Device.COMPUTER_SERVER:
-                    addPreference(-1, R.string.class_device,
-                            R.string.class_device_computer_server);
+                    deviceClassStr = R.string.class_device_computer_server;
                     break;
                 case BluetoothClass.Device.COMPUTER_LAPTOP:
-                    addPreference(R.drawable.ic_bt_laptop, R.string.class_device,
-                            R.string.class_device_computer_laptop);
+                    deviceIconId = R.drawable.ic_bt_laptop;
+                    deviceClassStr = R.string.class_device_computer_laptop;
                     break;
                 case BluetoothClass.Device.COMPUTER_HANDHELD_PC_PDA:
-                    addPreference(-1, R.string.class_device,
-                            R.string.class_device_computer_handheld_pc);
+                    deviceClassStr = R.string.class_device_computer_handheld_pc;
                     break;
                 case BluetoothClass.Device.COMPUTER_PALM_SIZE_PC_PDA:
-                    addPreference(-1, R.string.class_device,
-                            R.string.class_device_computer_palm_size_pc);
+                    deviceClassStr = R.string.class_device_computer_palm_size_pc;
                     break;
                 case BluetoothClass.Device.COMPUTER_WEARABLE:
-                    addPreference(-1, R.string.class_device,
-                            R.string.class_device_computer_wearable);
+                    deviceClassStr = R.string.class_device_computer_wearable;
                     break;
                 }
                 break;
             case BluetoothClass.Device.Major.PHONE:
-                addPreference(R.drawable.ic_bt_cellphone, R.string.class_major,
-                        R.string.class_major_cellphone);
+                mainIconId = R.drawable.ic_bt_cellphone;
+                mainClassStr = R.string.class_major_cellphone;
                 switch (bluetoothClass.getDeviceClass()) {
                 case BluetoothClass.Device.PHONE_UNCATEGORIZED:
-                    addPreference(-1, R.string.class_device, R.string.class_device_uncategorized);
+                    deviceClassStr = R.string.class_device_uncategorized;
                     break;
                 case BluetoothClass.Device.PHONE_CELLULAR:
-                    addPreference(-1, R.string.class_device, R.string.class_device_phone_cellular);
+                    deviceClassStr = R.string.class_device_phone_cellular;
                     break;
                 case BluetoothClass.Device.PHONE_CORDLESS:
-                    addPreference(-1, R.string.class_device, R.string.class_device_phone_cordless);
+                    deviceClassStr = R.string.class_device_phone_cordless;
                     break;
                 case BluetoothClass.Device.PHONE_SMART:
-                    addPreference(-1, R.string.class_device, R.string.class_device_phone_smart);
+                    deviceClassStr = R.string.class_device_phone_smart;
                     break;
                 case BluetoothClass.Device.PHONE_MODEM_OR_GATEWAY:
-                    addPreference(-1, R.string.class_device,
-                            R.string.class_device_phone_modem_or_gateway);
+                    deviceClassStr = R.string.class_device_phone_modem_or_gateway;
                     break;
                 case BluetoothClass.Device.PHONE_ISDN:
-                    addPreference(-1, R.string.class_device, R.string.class_device_phone_isdn);
+                    deviceClassStr = R.string.class_device_phone_isdn;
                     break;
                 }
                 break;
             case BluetoothClass.Device.Major.NETWORKING:
-                addPreference(-1, R.string.class_major, R.string.class_major_networking);
+                mainClassStr = R.string.class_major_networking;
                 break;
             case BluetoothClass.Device.Major.AUDIO_VIDEO:
-                addPreference(-1, R.string.class_major, R.string.class_major_audio_video);
+                mainClassStr = R.string.class_major_audio_video;
                 switch (bluetoothClass.getDeviceClass()) {
                 case BluetoothClass.Device.AUDIO_VIDEO_UNCATEGORIZED:
-                    addPreference(-1, R.string.class_device, R.string.class_device_uncategorized);
+                    deviceClassStr = R.string.class_device_uncategorized;
                     break;
                 case BluetoothClass.Device.AUDIO_VIDEO_WEARABLE_HEADSET:
-                    addPreference(-1, R.string.class_device,
-                            R.string.class_device_audio_video_headset);
+                    deviceClassStr = R.string.class_device_audio_video_headset;
                     break;
                 case BluetoothClass.Device.AUDIO_VIDEO_HANDSFREE:
-                    addPreference(-1, R.string.class_device,
-                            R.string.class_device_audio_video_handsfree);
+                    deviceClassStr = R.string.class_device_audio_video_handsfree;
                     break;
                 case BluetoothClass.Device.AUDIO_VIDEO_MICROPHONE:
-                    addPreference(-1, R.string.class_device,
-                            R.string.class_device_audio_vidoo_microphone);
+                    deviceClassStr = R.string.class_device_audio_vidoo_microphone;
                     break;
                 case BluetoothClass.Device.AUDIO_VIDEO_LOUDSPEAKER:
-                    addPreference(-1, R.string.class_device,
-                            R.string.class_device_audio_video_loudspeaker);
+                    deviceClassStr = R.string.class_device_audio_video_loudspeaker;
                     break;
                 case BluetoothClass.Device.AUDIO_VIDEO_HEADPHONES:
-                    addPreference(-1, R.string.class_device,
-                            R.string.class_device_audio_video_headphone);
+                    deviceClassStr = R.string.class_device_audio_video_headphone;
                     break;
                 case BluetoothClass.Device.AUDIO_VIDEO_PORTABLE_AUDIO:
-                    addPreference(-1, R.string.class_device,
-                            R.string.class_device_audio_video_portable_audio);
+                    deviceClassStr = R.string.class_device_audio_video_portable_audio;
                     break;
                 case BluetoothClass.Device.AUDIO_VIDEO_SET_TOP_BOX:
-                    addPreference(-1, R.string.class_device,
-                            R.string.class_device_audio_video_set_top_box);
+                    deviceClassStr = R.string.class_device_audio_video_set_top_box;
                     break;
                 case BluetoothClass.Device.AUDIO_VIDEO_HIFI_AUDIO:
-                    addPreference(-1, R.string.class_device,
-                            R.string.class_device_audio_video_hifi_audio);
+                    deviceClassStr = R.string.class_device_audio_video_hifi_audio;
                     break;
                 case BluetoothClass.Device.AUDIO_VIDEO_VCR:
-                    addPreference(-1, R.string.class_device, R.string.class_device_audio_video_vcr);
+                    deviceClassStr = R.string.class_device_audio_video_vcr;
                     break;
                 case BluetoothClass.Device.AUDIO_VIDEO_VIDEO_CAMERA:
-                    addPreference(-1, R.string.class_device,
-                            R.string.class_device_audio_video_video_camera);
+                    deviceClassStr = R.string.class_device_audio_video_video_camera;
                     break;
                 case BluetoothClass.Device.AUDIO_VIDEO_CAMCORDER:
-                    addPreference(-1, R.string.class_device,
-                            R.string.class_device_audio_video_camcorder);
+                    deviceClassStr = R.string.class_device_audio_video_camcorder;
                     break;
                 case BluetoothClass.Device.AUDIO_VIDEO_VIDEO_MONITOR:
-                    addPreference(-1, R.string.class_device,
-                            R.string.class_device_audio_video_video_monitor);
+                    deviceClassStr = R.string.class_device_audio_video_video_monitor;
                     break;
                 case BluetoothClass.Device.AUDIO_VIDEO_VIDEO_DISPLAY_AND_LOUDSPEAKER:
-                    addPreference(-1, R.string.class_device,
-                            R.string.class_device_audio_video_video_display_and_loudspeaker);
+                    deviceClassStr = R.string.class_device_audio_video_video_display_and_loudspeaker;
                     break;
                 case BluetoothClass.Device.AUDIO_VIDEO_VIDEO_CONFERENCING:
-                    addPreference(-1, R.string.class_device,
-                            R.string.class_device_audio_video_video_conference);
+                    deviceClassStr = R.string.class_device_audio_video_video_conference;
                     break;
                 case BluetoothClass.Device.AUDIO_VIDEO_VIDEO_GAMING_TOY:
-                    addPreference(-1, R.string.class_device,
-                            R.string.class_device_audio_video_gaming_toy);
+                    deviceClassStr = R.string.class_device_audio_video_gaming_toy;
                     break;
                 }
                 break;
             case BluetoothClass.Device.Major.PERIPHERAL:
-                addPreference(-1, R.string.class_major, R.string.class_major_peripheral);
+                mainClassStr = R.string.class_major_peripheral;
                 int deviceClass = bluetoothClass.getDeviceClass();
                 if (deviceClass == ClassWrapper.PERIPHERAL_KEYBOARD) {
-                    addPreference(R.drawable.ic_bt_keyboard_hid, R.string.class_device,
-                            R.string.class_device_keyboard);
+                    deviceIconId = R.drawable.ic_bt_keyboard_hid;
+                    deviceClassStr = R.string.class_device_keyboard;
                 } else if (deviceClass == ClassWrapper.PERIPHERAL_KEYBOARD_POINTING) {
-                    addPreference(R.drawable.ic_bt_keyboard_hid, R.string.class_device,
-                            R.string.class_device_keyboard_hid);
+                    deviceIconId = R.drawable.ic_bt_keyboard_hid;
+                    deviceClassStr = R.string.class_device_keyboard_hid;
                 } else if (deviceClass == ClassWrapper.PERIPHERAL_POINTING) {
-                    addPreference(R.drawable.ic_bt_pointing_hid, R.string.class_device,
-                            R.string.class_device_pointing);
+                    deviceIconId = R.drawable.ic_bt_pointing_hid;
+                    deviceClassStr = R.string.class_device_pointing;
                 } else {
-                    addPreference(R.drawable.ic_bt_misc_hid,
-                            R.string.class_device, R.string.class_device_misc);
+                    deviceIconId = R.drawable.ic_bt_misc_hid;
+                    deviceClassStr = R.string.class_device_misc;
                 }
                 break;
             case BluetoothClass.Device.Major.IMAGING:
-                addPreference(R.drawable.ic_bt_imaging, R.string.class_major,
-                        R.string.class_major_imaging);
+                mainClassStr = R.string.class_major_imaging;
                 break;
             case BluetoothClass.Device.Major.WEARABLE:
-                addPreference(-1, R.string.class_major, R.string.class_major_wearable);
+                mainClassStr = R.string.class_major_wearable;
                 switch (bluetoothClass.getDeviceClass()) {
                 case BluetoothClass.Device.WEARABLE_UNCATEGORIZED:
-                    addPreference(-1, R.string.class_device, R.string.class_device_uncategorized);
+                    deviceClassStr = R.string.class_device_uncategorized;
                     break;
                 case BluetoothClass.Device.WEARABLE_WRIST_WATCH:
-                    addPreference(-1, R.string.class_device,
-                            R.string.class_device_wearable_wrist_watch);
+                    deviceClassStr = R.string.class_device_wearable_wrist_watch;
                     break;
                 case BluetoothClass.Device.WEARABLE_PAGER:
-                    addPreference(-1, R.string.class_device, R.string.class_device_wearable_pager);
+                    deviceClassStr = R.string.class_device_wearable_pager;
                     break;
                 case BluetoothClass.Device.WEARABLE_JACKET:
-                    addPreference(-1, R.string.class_device,
-                            R.string.class_device_wearable_jacket);
+                    deviceClassStr = R.string.class_device_wearable_jacket;
                     break;
                 case BluetoothClass.Device.WEARABLE_HELMET:
-                    addPreference(-1, R.string.class_device,
-                            R.string.class_device_wearable_helmet);
+                    deviceClassStr = R.string.class_device_wearable_helmet;
                     break;
                 case BluetoothClass.Device.WEARABLE_GLASSES:
-                    addPreference(-1, R.string.class_device,
-                            R.string.class_device_wearable_glasses);
+                    deviceClassStr = R.string.class_device_wearable_glasses;
                     break;
                 }
                 break;
             case BluetoothClass.Device.Major.TOY:
-                addPreference(-1, R.string.class_major, R.string.class_major_toy);
+                mainClassStr = R.string.class_major_toy;
                 switch (bluetoothClass.getDeviceClass()) {
                 case BluetoothClass.Device.TOY_UNCATEGORIZED:
-                    addPreference(-1, R.string.class_device, R.string.class_device_uncategorized);
+                    deviceClassStr = R.string.class_device_uncategorized;
                     break;
                 case BluetoothClass.Device.TOY_ROBOT:
-                    addPreference(-1, R.string.class_device, R.string.class_device_toy_robot);
+                    deviceClassStr = R.string.class_device_toy_robot;
                     break;
                 case BluetoothClass.Device.TOY_VEHICLE:
-                    addPreference(-1, R.string.class_device, R.string.class_device_toy_vehicle);
+                    deviceClassStr = R.string.class_device_toy_vehicle;
                     break;
                 case BluetoothClass.Device.TOY_DOLL_ACTION_FIGURE:
-                    addPreference(-1, R.string.class_device,
-                            R.string.class_device_toy_doll_action_figure);
+                    deviceClassStr = R.string.class_device_toy_doll_action_figure;
                     break;
                 case BluetoothClass.Device.TOY_CONTROLLER:
-                    addPreference(-1, R.string.class_device, R.string.class_device_toy_controller);
+                    deviceClassStr = R.string.class_device_toy_controller;
                     break;
                 case BluetoothClass.Device.TOY_GAME:
-                    addPreference(-1, R.string.class_device, R.string.class_device_toy_game);
+                    deviceClassStr = R.string.class_device_toy_game;
                     break;
                 }
                 break;
             case BluetoothClass.Device.Major.HEALTH:
-                addPreference(-1, R.string.class_major, R.string.class_major_health);
+                mainClassStr = R.string.class_major_health;
                 switch (bluetoothClass.getDeviceClass()) {
                 case BluetoothClass.Device.HEALTH_UNCATEGORIZED:
-                    addPreference(-1, R.string.class_device, R.string.class_device_uncategorized);
+                    deviceClassStr = R.string.class_device_uncategorized;
                     break;
                 case BluetoothClass.Device.HEALTH_BLOOD_PRESSURE:
-                    addPreference(-1, R.string.class_device,
-                            R.string.class_device_health_blood_pressure);
+                    deviceClassStr = R.string.class_device_health_blood_pressure;
                     break;
                 case BluetoothClass.Device.HEALTH_THERMOMETER:
-                    addPreference(-1, R.string.class_device,
-                            R.string.class_device_health_thermometer);
+                    deviceClassStr = R.string.class_device_health_thermometer;
                     break;
                 case BluetoothClass.Device.HEALTH_WEIGHING:
-                    addPreference(-1, R.string.class_device, R.string.class_device_health_weighing);
+                    deviceClassStr = R.string.class_device_health_weighing;
                     break;
                 case BluetoothClass.Device.HEALTH_GLUCOSE:
-                    addPreference(-1, R.string.class_device, R.string.class_device_health_glucose);
+                    deviceClassStr = R.string.class_device_health_glucose;
                     break;
                 case BluetoothClass.Device.HEALTH_PULSE_OXIMETER:
-                    addPreference(-1, R.string.class_device,
-                            R.string.class_device_health_pulse_oximeter);
+                    deviceClassStr = R.string.class_device_health_pulse_oximeter;
                     break;
                 case BluetoothClass.Device.HEALTH_PULSE_RATE:
-                    addPreference(-1, R.string.class_device,
-                            R.string.class_device_health_pulse_rate);
+                    deviceClassStr = R.string.class_device_health_pulse_rate;
                     break;
                 case BluetoothClass.Device.HEALTH_DATA_DISPLAY:
-                    addPreference(-1, R.string.class_device,
-                            R.string.class_device_health_data_display);
+                    deviceClassStr = R.string.class_device_health_data_display;
                     break;
                 }
                 break;
             case BluetoothClass.Device.Major.UNCATEGORIZED:
-                addPreference(-1, R.string.class_major, R.string.class_major_uncategorized);
+                mainClassStr = R.string.class_major_uncategorized;
                 break;
             default:
                 break;
+            }
+
+            if (mainClassStr != -1) {
+                addPreference(mainIconId, R.string.class_major,
+                        String.format("%s (0x%s)",
+                                getResources().getString(mainClassStr),
+                                Integer.toHexString(bluetoothClass.getMajorDeviceClass())));
+            }
+
+            if (deviceClassStr != -1) {
+                addPreference(deviceIconId, R.string.class_device,
+                        String.format("%s (0x%s)",
+                                getResources().getString(deviceClassStr),
+                                Integer.toHexString(bluetoothClass.getDeviceClass())));
             }
         }
     }
