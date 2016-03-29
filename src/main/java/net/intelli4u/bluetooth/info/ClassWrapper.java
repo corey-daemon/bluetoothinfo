@@ -54,7 +54,7 @@ public class ClassWrapper {
 
     public boolean doesClassMatch(int profile) {
         return (Boolean) reflectMethod(mBluetoothClass, "doesClassMatch",
-                new Class<?>[] {Integer.class}, profile);
+                new Class<?>[] {int.class}, profile);
     }
 
     private static Object reflectMethod(Object obj, String name, Class<?>[] parameters, Object args) {
