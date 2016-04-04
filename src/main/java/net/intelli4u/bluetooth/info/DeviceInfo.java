@@ -63,8 +63,6 @@ public class DeviceInfo extends PreferenceActivity {
             addPreference(DevicePreference.getBluetoothClassDrawable(wrapper),
                     R.string.device_class, "0x" + bluetoothClass.toString());
 
-            int mainIconId = -1;
-            int deviceIconId = -1;
             int mainClassStr = -1;
             int deviceClassStr = -1;
             switch (bluetoothClass.getMajorDeviceClass()) {
@@ -72,7 +70,6 @@ public class DeviceInfo extends PreferenceActivity {
                 mainClassStr = R.string.class_major_misc;
                 break;
             case BluetoothClass.Device.Major.COMPUTER:
-                mainIconId = R.drawable.ic_bt_laptop;
                 mainClassStr = R.string.class_major_computer;
                 switch (bluetoothClass.getDeviceClass()) {
                 case BluetoothClass.Device.COMPUTER_UNCATEGORIZED:
@@ -85,7 +82,6 @@ public class DeviceInfo extends PreferenceActivity {
                     deviceClassStr = R.string.class_device_computer_server;
                     break;
                 case BluetoothClass.Device.COMPUTER_LAPTOP:
-                    deviceIconId = R.drawable.ic_bt_laptop;
                     deviceClassStr = R.string.class_device_computer_laptop;
                     break;
                 case BluetoothClass.Device.COMPUTER_HANDHELD_PC_PDA:
@@ -100,7 +96,6 @@ public class DeviceInfo extends PreferenceActivity {
                 }
                 break;
             case BluetoothClass.Device.Major.PHONE:
-                mainIconId = R.drawable.ic_bt_cellphone;
                 mainClassStr = R.string.class_major_cellphone;
                 switch (bluetoothClass.getDeviceClass()) {
                 case BluetoothClass.Device.PHONE_UNCATEGORIZED:
@@ -183,16 +178,12 @@ public class DeviceInfo extends PreferenceActivity {
                 mainClassStr = R.string.class_major_peripheral;
                 int deviceClass = bluetoothClass.getDeviceClass();
                 if (deviceClass == ClassWrapper.PERIPHERAL_KEYBOARD) {
-                    deviceIconId = R.drawable.ic_bt_keyboard_hid;
                     deviceClassStr = R.string.class_device_keyboard;
                 } else if (deviceClass == ClassWrapper.PERIPHERAL_KEYBOARD_POINTING) {
-                    deviceIconId = R.drawable.ic_bt_keyboard_hid;
                     deviceClassStr = R.string.class_device_keyboard_hid;
                 } else if (deviceClass == ClassWrapper.PERIPHERAL_POINTING) {
-                    deviceIconId = R.drawable.ic_bt_pointing_hid;
                     deviceClassStr = R.string.class_device_pointing;
                 } else {
-                    deviceIconId = R.drawable.ic_bt_misc_hid;
                     deviceClassStr = R.string.class_device_misc;
                 }
                 break;
@@ -282,14 +273,16 @@ public class DeviceInfo extends PreferenceActivity {
             }
 
             if (mainClassStr != -1) {
-                addPreference(mainIconId, R.string.class_major,
+                addPreference(DevicePreference.getBluetoothMajorClassDrawable(wrapper),
+                        R.string.class_major,
                         String.format("%s (0x%s)",
                                 getResources().getString(mainClassStr),
                                 Integer.toHexString(bluetoothClass.getMajorDeviceClass())));
             }
 
             if (deviceClassStr != -1) {
-                addPreference(deviceIconId, R.string.class_device,
+                addPreference(DevicePreference.getBluetoothClassDrawable(wrapper),
+                        R.string.class_device,
                         String.format("%s (0x%s)",
                                 getResources().getString(deviceClassStr),
                                 Integer.toHexString(bluetoothClass.getDeviceClass())));
