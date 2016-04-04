@@ -303,47 +303,47 @@ public class DeviceInfo extends PreferenceActivity {
 
     private String getProfileString(final ParcelUuid uuid) {
         int id = -1;
-        if (UuidWrapper.isBaseUuid(uuid)) {
+        if (LocalBluetoothUuid.isBaseUuid(uuid)) {
             id = R.string.profile_base_uuid;
-        } else if (UuidWrapper.isAudioSource(uuid)) {
+        } else if (LocalBluetoothUuid.isAudioSource(uuid)) {
             id = R.string.profile_audio_source;
-        } else if (UuidWrapper.isAudioSink(uuid)) {
+        } else if (LocalBluetoothUuid.isAudioSink(uuid)) {
             id = R.string.profile_audio_sink;
-        } else if (UuidWrapper.isAdvAudioDist(uuid)) {
+        } else if (LocalBluetoothUuid.isAdvAudioDist(uuid)) {
             id = R.string.profile_adv_audio_dist;
-        } else if (UuidWrapper.isHandsfree(uuid)) {
+        } else if (LocalBluetoothUuid.isHandsfree(uuid)) {
             id = R.string.profile_handsfree;
-        } else if (UuidWrapper.isHandsfreeAg(uuid)) {
+        } else if (LocalBluetoothUuid.isHandsfreeAg(uuid)) {
             id = R.string.profile_handsfree_ag;
-        } else if (UuidWrapper.isHeadset(uuid)) {
+        } else if (LocalBluetoothUuid.isHeadset(uuid)) {
             id = R.string.profile_headset;
-        } else if (UuidWrapper.isHspAg(uuid)) {
+        } else if (LocalBluetoothUuid.isHspAg(uuid)) {
             id = R.string.profile_hsp_ag;
-        } else if (UuidWrapper.isOpp(uuid)) {
+        } else if (LocalBluetoothUuid.isOpp(uuid)) {
             id = R.string.profile_opp;
-        } else if (UuidWrapper.isAvrcpController(uuid)) {
+        } else if (LocalBluetoothUuid.isAvrcpController(uuid)) {
             id = R.string.profile_avrcp_controller;
-        } else if (UuidWrapper.isAvrcpTarget(uuid)) {
+        } else if (LocalBluetoothUuid.isAvrcpTarget(uuid)) {
             id = R.string.profile_avrcp_target;
-        } else if (UuidWrapper.isInputDevice(uuid)) {
+        } else if (LocalBluetoothUuid.isInputDevice(uuid)) {
             id = R.string.profile_input_device;
-        } else if (UuidWrapper.isPanu(uuid)) {
+        } else if (LocalBluetoothUuid.isPanu(uuid)) {
             id = R.string.profile_panu;
-        } else if (UuidWrapper.isNap(uuid)) {
+        } else if (LocalBluetoothUuid.isNap(uuid)) {
             id = R.string.profile_nap;
-        } else if (UuidWrapper.isBnep(uuid)) {
+        } else if (LocalBluetoothUuid.isBnep(uuid)) {
             id = R.string.profile_bnep;
-        } else if (UuidWrapper.isMap(uuid)) {
+        } else if (LocalBluetoothUuid.isMap(uuid)) {
             id = R.string.profile_map;
-        } else if (UuidWrapper.isMns(uuid)) {
+        } else if (LocalBluetoothUuid.isMns(uuid)) {
             id = R.string.profile_mns;
-        } else if (UuidWrapper.isMas(uuid)) {
+        } else if (LocalBluetoothUuid.isMas(uuid)) {
             id = R.string.profile_mas;
-        } else if (UuidWrapper.isSap(uuid)) {
+        } else if (LocalBluetoothUuid.isSap(uuid)) {
             id = R.string.profile_sap;
-        } else if (UuidWrapper.isPbapClient(uuid)) {
+        } else if (LocalBluetoothUuid.isPbapClient(uuid)) {
             id = R.string.profile_pbap_client;
-        } else if (UuidWrapper.isPbapServer(uuid)) {
+        } else if (LocalBluetoothUuid.isPbapServer(uuid)) {
             id = R.string.profile_pbap_server;
         } else {
             id = R.string.unknown;

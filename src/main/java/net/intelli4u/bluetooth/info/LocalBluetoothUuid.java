@@ -17,9 +17,8 @@
 package net.intelli4u.bluetooth.info;
 
 import android.os.ParcelUuid;
-import android.util.Log;
 
-public class UuidWrapper {
+public class LocalBluetoothUuid {
     private static final String BLUETOOTH_UUID_CLASS = "android.bluetooth.BluetoothUuid";
 
     private static final ParcelUuid BASE_UUID =
