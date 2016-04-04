@@ -27,6 +27,30 @@
   <string name="bluetooth_devices">DEVICES</string>
   <string name="bluetooth_bonded_devices">BONDED DEVICES</string>
 
+  <string name="unknown">Unknown</string>
+
+  <string name="profile_base_uuid">Base UUID</string>
+  <string name="profile_audio_source">Audio Source</string>
+  <string name="profile_audio_sink">Audio Sink</string>
+  <string name="profile_adv_audio_dist">Advanced Audio Distribution</string>
+  <string name="profile_handsfree">Handsfree</string>
+  <string name="profile_handsfree_ag">Handsfree Audio Gateway</string>
+  <string name="profile_headset">Headset</string>
+  <string name="profile_hsp_ag">Headset Audio Gateway</string>
+  <string name="profile_avrcp_controller">AVRCP Controller</string>
+  <string name="profile_avrcp_target">AVRCP Target</string>
+  <string name="profile_input_device">Input Device</string>
+  <string name="profile_panu">PANu</string>
+  <string name="profile_nap">NAP</string>
+  <string name="profile_bnep">BNEP</string>
+  <string name="profile_map">MAP</string>
+  <string name="profile_mns">MNS</string>
+  <string name="profile_mas">MAS</string>
+  <string name="profile_opp">OPP</string>
+  <string name="profile_pbap_client">PBAP Client</string>
+  <string name="profile_pbap_server">PBAP Server</string>
+  <string name="profile_sap">SAP</string>
+
   <string name="device_name">Name</string>
   <string name="device_alias">Alias</string>
   <string name="device_address">Address</string>

@@ -23,6 +23,8 @@ import android.os.Bundle;
 import android.os.ParcelUuid;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceCategory;
+import android.preference.PreferenceGroup;
 import android.util.Log;
 
 public class DeviceInfo extends PreferenceActivity {
@@ -47,13 +49,7 @@ public class DeviceInfo extends PreferenceActivity {
             addPreference(-1, R.string.device_type, R.array.device_type, device.getType());
 
             handleBluetoothClass(wrapper);
-
-            ParcelUuid[] uuids = wrapper.getUuids();
-            if (uuids != null) {
-                for (ParcelUuid uuid : uuids) {
-                    addPreference(-1, R.string.device_uuid, uuid.toString());
-                }
-            }
+            handleBluetoothUuids(wrapper);
         }
     }
 
@@ -290,6 +286,72 @@ public class DeviceInfo extends PreferenceActivity {
         }
     }
 
+    private void handleBluetoothUuids(final DeviceWrapper wrapper) {
+        ParcelUuid[] uuids = wrapper.getUuids();
+        if (uuids != null) {
+            final PreferenceGroup preference = new PreferenceCategory(this);
+
+            preference.setTitle(R.string.device_uuid);
+            preference.setEnabled(true);
+            getPreferenceScreen().addPreference(preference);
+
+            for (ParcelUuid uuid : uuids) {
+                addPreference(preference, -1, getProfileString(uuid), uuid.toString());
+            }
+        }
+    }
+
+    private String getProfileString(final ParcelUuid uuid) {
+        int id = -1;
+        if (UuidWrapper.isBaseUuid(uuid)) {
+            id = R.string.profile_base_uuid;
+        } else if (UuidWrapper.isAudioSource(uuid)) {
+            id = R.string.profile_audio_source;
+        } else if (UuidWrapper.isAudioSink(uuid)) {
+            id = R.string.profile_audio_sink;
+        } else if (UuidWrapper.isAdvAudioDist(uuid)) {
+            id = R.string.profile_adv_audio_dist;
+        } else if (UuidWrapper.isHandsfree(uuid)) {
+            id = R.string.profile_handsfree;
+        } else if (UuidWrapper.isHandsfreeAg(uuid)) {
+            id = R.string.profile_handsfree_ag;
+        } else if (UuidWrapper.isHeadset(uuid)) {
+            id = R.string.profile_headset;
+        } else if (UuidWrapper.isHspAg(uuid)) {
+            id = R.string.profile_hsp_ag;
+        } else if (UuidWrapper.isOpp(uuid)) {
+            id = R.string.profile_opp;
+        } else if (UuidWrapper.isAvrcpController(uuid)) {
+            id = R.string.profile_avrcp_controller;
+        } else if (UuidWrapper.isAvrcpTarget(uuid)) {
+            id = R.string.profile_avrcp_target;
+        } else if (UuidWrapper.isInputDevice(uuid)) {
+            id = R.string.profile_input_device;
+        } else if (UuidWrapper.isPanu(uuid)) {
+            id = R.string.profile_panu;
+        } else if (UuidWrapper.isNap(uuid)) {
+            id = R.string.profile_nap;
+        } else if (UuidWrapper.isBnep(uuid)) {
+            id = R.string.profile_bnep;
+        } else if (UuidWrapper.isMap(uuid)) {
+            id = R.string.profile_map;
+        } else if (UuidWrapper.isMns(uuid)) {
+            id = R.string.profile_mns;
+        } else if (UuidWrapper.isMas(uuid)) {
+            id = R.string.profile_mas;
+        } else if (UuidWrapper.isSap(uuid)) {
+            id = R.string.profile_sap;
+        } else if (UuidWrapper.isPbapClient(uuid)) {
+            id = R.string.profile_pbap_client;
+        } else if (UuidWrapper.isPbapServer(uuid)) {
+            id = R.string.profile_pbap_server;
+        } else {
+            id = R.string.unknown;
+        }
+
+        return getResources().getString(id);
+    }
+
     private void addPreference(int drawable, int title, int summary) {
         addPreference(drawable, getResources().getString(title), getResources()
                 .getString(summary));
@@ -310,6 +372,10 @@ public class DeviceInfo extends PreferenceActivity {
     }
 
     private void addPreference(int drawable, String title, String summary) {
+        addPreference(getPreferenceScreen(), drawable, title, summary);
+    }
+
+    private void addPreference(PreferenceGroup group, int drawable, String title, String summary) {
         if (summary == null)
             return;
 
@@ -321,6 +387,6 @@ public class DeviceInfo extends PreferenceActivity {
             preference.setIcon(drawable);
         }
 
-        getPreferenceScreen().addPreference(preference);
+        group.addPreference(preference);
     }
 }
