@@ -18,7 +18,7 @@ package net.intelli4u.bluetooth.info;
 
 import android.bluetooth.BluetoothClass;
 
-public class ClassWrapper {
+public class LocalBluetoothClass {
     public static final int PROFILE_A2DP;
     public static final int PROFILE_HEADSET;
     public static final int PERIPHERAL_KEYBOARD;
@@ -36,7 +36,7 @@ public class ClassWrapper {
 
     private final BluetoothClass mBluetoothClass;
 
-    public ClassWrapper(BluetoothClass bluetoothClass) {
+    public LocalBluetoothClass(BluetoothClass bluetoothClass) {
         mBluetoothClass = bluetoothClass;
     }
 

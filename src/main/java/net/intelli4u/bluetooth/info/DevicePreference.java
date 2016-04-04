@@ -51,7 +51,7 @@ public class DevicePreference extends Preference implements Preference.OnPrefere
     }
 
     public static int getBluetoothMajorClassDrawable(final DeviceWrapper wrapper) {
-        ClassWrapper bluetoothClass = wrapper.getBluetoothClassWrapper();
+        LocalBluetoothClass bluetoothClass = wrapper.getLocalBluetoothClass();
 
         if (bluetoothClass != null) {
             switch (bluetoothClass.getMajorDeviceClass()) {
@@ -70,7 +70,7 @@ public class DevicePreference extends Preference implements Preference.OnPrefere
     }
 
     public static int getBluetoothClassDrawable(final DeviceWrapper wrapper) {
-        ClassWrapper bluetoothClass = wrapper.getBluetoothClassWrapper();
+        LocalBluetoothClass bluetoothClass = wrapper.getLocalBluetoothClass();
 
         if (bluetoothClass != null) {
             switch (bluetoothClass.getMajorDeviceClass()) {
@@ -80,10 +80,10 @@ public class DevicePreference extends Preference implements Preference.OnPrefere
                 return R.drawable.ic_bt_cellphone;
             case BluetoothClass.Device.Major.PERIPHERAL:
                 int deviceClass = bluetoothClass.getDeviceClass();
-                if (deviceClass == ClassWrapper.PERIPHERAL_KEYBOARD
-                        || deviceClass == ClassWrapper.PERIPHERAL_KEYBOARD_POINTING) {
+                if (deviceClass == LocalBluetoothClass.PERIPHERAL_KEYBOARD
+                        || deviceClass == LocalBluetoothClass.PERIPHERAL_KEYBOARD_POINTING) {
                     return R.drawable.ic_bt_keyboard_hid;
-                } else if (deviceClass == ClassWrapper.PERIPHERAL_POINTING) {
+                } else if (deviceClass == LocalBluetoothClass.PERIPHERAL_POINTING) {
                     return R.drawable.ic_bt_pointing_hid;
                 } else {
                     return R.drawable.ic_bt_misc_hid;
@@ -94,9 +94,9 @@ public class DevicePreference extends Preference implements Preference.OnPrefere
                 break;
             }
 
-            if (bluetoothClass.doesClassMatch(ClassWrapper.PROFILE_A2DP)) {
+            if (bluetoothClass.doesClassMatch(LocalBluetoothClass.PROFILE_A2DP)) {
                 return R.drawable.ic_bt_headphones_a2dp;
-            } else if (bluetoothClass.doesClassMatch(ClassWrapper.PROFILE_HEADSET)) {
+            } else if (bluetoothClass.doesClassMatch(LocalBluetoothClass.PROFILE_HEADSET)) {
                 return R.drawable.ic_bt_headset_hfp;
             }
         }

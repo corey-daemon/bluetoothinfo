@@ -173,11 +173,11 @@ public class DeviceInfo extends PreferenceActivity {
             case BluetoothClass.Device.Major.PERIPHERAL:
                 mainClassStr = R.string.class_major_peripheral;
                 int deviceClass = bluetoothClass.getDeviceClass();
-                if (deviceClass == ClassWrapper.PERIPHERAL_KEYBOARD) {
+                if (deviceClass == LocalBluetoothClass.PERIPHERAL_KEYBOARD) {
                     deviceClassStr = R.string.class_device_keyboard;
-                } else if (deviceClass == ClassWrapper.PERIPHERAL_KEYBOARD_POINTING) {
+                } else if (deviceClass == LocalBluetoothClass.PERIPHERAL_KEYBOARD_POINTING) {
                     deviceClassStr = R.string.class_device_keyboard_hid;
-                } else if (deviceClass == ClassWrapper.PERIPHERAL_POINTING) {
+                } else if (deviceClass == LocalBluetoothClass.PERIPHERAL_POINTING) {
                     deviceClassStr = R.string.class_device_pointing;
                 } else {
                     deviceClassStr = R.string.class_device_misc;

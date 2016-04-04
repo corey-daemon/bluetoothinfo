@@ -43,8 +43,8 @@ public class DeviceWrapper {
         return mDevice.getBluetoothClass();
     }
 
-    public ClassWrapper getBluetoothClassWrapper() {
-        return new ClassWrapper(getBluetoothClass());
+    public LocalBluetoothClass getLocalBluetoothClass() {
+        return new LocalBluetoothClass(getBluetoothClass());
     }
 
     public String getName() {
