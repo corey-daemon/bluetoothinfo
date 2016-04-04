@@ -20,9 +20,6 @@ import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.os.ParcelUuid;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
 public class DeviceWrapper {
     private final BluetoothDevice mDevice;
 
@@ -35,11 +32,11 @@ public class DeviceWrapper {
     }
 
     public String getAlias() {
-        return reflectMethod(mDevice, "getAlias");
+        return Reflect.executeMethod(mDevice, "getAlias");
     }
 
     public String getAliasName() {
-        return reflectMethod(mDevice, "getAliasName");
+        return Reflect.executeMethod(mDevice, "getAliasName");
     }
 
     public BluetoothClass getBluetoothClass() {
@@ -64,18 +61,5 @@ public class DeviceWrapper {
 
     public BluetoothDevice getDevice() {
         return mDevice;
-    }
-
-    private static String reflectMethod(Object obj, String name) {
-        final Class<?> clazz = obj.getClass();
-        try {
-            final Method method = clazz.getMethod(name);
-            return (String) method.invoke(obj);
-        } catch (NoSuchMethodException e) {
-        } catch (IllegalAccessException e) {
-        } catch (InvocationTargetException e) {
-        }
-
-        return null;
     }
 }

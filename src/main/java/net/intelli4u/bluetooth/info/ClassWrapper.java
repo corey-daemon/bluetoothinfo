@@ -18,10 +18,6 @@ package net.intelli4u.bluetooth.info;
 
 import android.bluetooth.BluetoothClass;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
 public class ClassWrapper {
     public static final int PROFILE_A2DP;
     public static final int PROFILE_HEADSET;
@@ -30,12 +26,12 @@ public class ClassWrapper {
     public static final int PERIPHERAL_POINTING;
 
     static {
-        PROFILE_A2DP = reflectConstant(BluetoothClass.class, "PROFILE_A2DP");
-        PROFILE_HEADSET = reflectConstant(BluetoothClass.class, "PROFILE_HEADSET");
-        PERIPHERAL_KEYBOARD = reflectConstant(BluetoothClass.Device.class, "PERIPHERAL_KEYBOARD");
-        PERIPHERAL_KEYBOARD_POINTING = reflectConstant(BluetoothClass.Device.class,
+        PROFILE_A2DP = Reflect.getInt(BluetoothClass.class, "PROFILE_A2DP");
+        PROFILE_HEADSET = Reflect.getInt(BluetoothClass.class, "PROFILE_HEADSET");
+        PERIPHERAL_KEYBOARD = Reflect.getInt(BluetoothClass.Device.class, "PERIPHERAL_KEYBOARD");
+        PERIPHERAL_KEYBOARD_POINTING = Reflect.getInt(BluetoothClass.Device.class,
                 "PERIPHERAL_KEYBOARD_POINTING");
-        PERIPHERAL_POINTING = reflectConstant(BluetoothClass.Device.class, "PERIPHERAL_POINTING");
+        PERIPHERAL_POINTING = Reflect.getInt(BluetoothClass.Device.class, "PERIPHERAL_POINTING");
     }
 
     private final BluetoothClass mBluetoothClass;
@@ -53,32 +49,7 @@ public class ClassWrapper {
     }
 
     public boolean doesClassMatch(int profile) {
-        return (Boolean) reflectMethod(mBluetoothClass, "doesClassMatch",
+        return (Boolean) Reflect.executeMethod(mBluetoothClass, "doesClassMatch",
                 new Class<?>[] {int.class}, profile);
-    }
-
-    private static Object reflectMethod(Object obj, String name, Class<?>[] parameters, Object args) {
-        final Class<?> clazz = obj.getClass();
-        try {
-            final Method method = clazz.getMethod(name, parameters);
-            return method.invoke(obj, args);
-        } catch (NoSuchMethodException e) {
-        } catch (IllegalAccessException e) {
-        } catch (InvocationTargetException e) {
-        }
-
-        return null;
-    }
-
-    private static int reflectConstant(Class<?> clazz, String name) {
-        try {
-            final Field field = clazz.getField(name);
-            return field.getInt(clazz);
-        } catch (IllegalAccessException e) {
-        } catch (IllegalArgumentException e) {
-        } catch (NoSuchFieldException e) {
-        }
-
-        return -1;
     }
 }
