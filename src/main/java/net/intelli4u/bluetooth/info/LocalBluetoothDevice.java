@@ -20,10 +20,10 @@ import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.os.ParcelUuid;
 
-public class DeviceWrapper {
+public class LocalBluetoothDevice {
     private final BluetoothDevice mDevice;
 
-    public DeviceWrapper(BluetoothDevice device) {
+    public LocalBluetoothDevice(BluetoothDevice device) {
         mDevice = device;
     }
 

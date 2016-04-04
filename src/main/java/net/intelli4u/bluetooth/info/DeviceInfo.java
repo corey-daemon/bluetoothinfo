@@ -40,7 +40,7 @@ public class DeviceInfo extends PreferenceActivity {
         Intent intent = getIntent();
         if (intent != null) {
             BluetoothDevice device = intent.getParcelableExtra(Constants.EXTRA_DEVICE);
-            DeviceWrapper wrapper = new DeviceWrapper(device);
+            LocalBluetoothDevice wrapper = new LocalBluetoothDevice(device);
 
             addPreference(DevicePreference.getBluetoothClassDrawable(wrapper),
                     R.string.device_name, wrapper.getName());
@@ -53,7 +53,7 @@ public class DeviceInfo extends PreferenceActivity {
         }
     }
 
-    private void handleBluetoothClass(final DeviceWrapper wrapper) {
+    private void handleBluetoothClass(final LocalBluetoothDevice wrapper) {
         BluetoothClass bluetoothClass = wrapper.getBluetoothClass();
         if (bluetoothClass != null) {
             addPreference(DevicePreference.getBluetoothClassDrawable(wrapper),
@@ -286,7 +286,7 @@ public class DeviceInfo extends PreferenceActivity {
         }
     }
 
-    private void handleBluetoothUuids(final DeviceWrapper wrapper) {
+    private void handleBluetoothUuids(final LocalBluetoothDevice wrapper) {
         ParcelUuid[] uuids = wrapper.getUuids();
         if (uuids != null) {
             final PreferenceGroup preference = new PreferenceCategory(this);

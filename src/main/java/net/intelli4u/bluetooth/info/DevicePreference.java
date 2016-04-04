@@ -23,12 +23,12 @@ import android.content.Intent;
 import android.preference.Preference;
 
 public class DevicePreference extends Preference implements Preference.OnPreferenceClickListener {
-    private final DeviceWrapper mDeviceWrapper;
+    private final LocalBluetoothDevice mDeviceWrapper;
 
     public DevicePreference(Context context, BluetoothDevice device) {
         super(context);
 
-        mDeviceWrapper = new DeviceWrapper(device);
+        mDeviceWrapper = new LocalBluetoothDevice(device);
 
         setTitle(mDeviceWrapper.getName());
         setSummary(mDeviceWrapper.getAddress());
@@ -50,7 +50,7 @@ public class DevicePreference extends Preference implements Preference.OnPrefere
         return true;
     }
 
-    public static int getBluetoothMajorClassDrawable(final DeviceWrapper wrapper) {
+    public static int getBluetoothMajorClassDrawable(final LocalBluetoothDevice wrapper) {
         LocalBluetoothClass bluetoothClass = wrapper.getLocalBluetoothClass();
 
         if (bluetoothClass != null) {
@@ -69,7 +69,7 @@ public class DevicePreference extends Preference implements Preference.OnPrefere
         return 0;
     }
 
-    public static int getBluetoothClassDrawable(final DeviceWrapper wrapper) {
+    public static int getBluetoothClassDrawable(final LocalBluetoothDevice wrapper) {
         LocalBluetoothClass bluetoothClass = wrapper.getLocalBluetoothClass();
 
         if (bluetoothClass != null) {
