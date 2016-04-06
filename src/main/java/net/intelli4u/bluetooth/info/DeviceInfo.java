@@ -296,60 +296,11 @@ public class DeviceInfo extends PreferenceActivity {
             getPreferenceScreen().addPreference(preference);
 
             for (ParcelUuid uuid : uuids) {
-                addPreference(preference, -1, getProfileString(uuid), uuid.toString());
+                addPreference(preference, -1,
+                        getResources().getString(LocalBluetoothUuid.getProfileResId(uuid)),
+                        uuid.toString());
             }
         }
-    }
-
-    private String getProfileString(final ParcelUuid uuid) {
-        int id = -1;
-        if (LocalBluetoothUuid.isBaseUuid(uuid)) {
-            id = R.string.profile_base_uuid;
-        } else if (LocalBluetoothUuid.isAudioSource(uuid)) {
-            id = R.string.profile_audio_source;
-        } else if (LocalBluetoothUuid.isAudioSink(uuid)) {
-            id = R.string.profile_audio_sink;
-        } else if (LocalBluetoothUuid.isAdvAudioDist(uuid)) {
-            id = R.string.profile_adv_audio_dist;
-        } else if (LocalBluetoothUuid.isHandsfree(uuid)) {
-            id = R.string.profile_handsfree;
-        } else if (LocalBluetoothUuid.isHandsfreeAg(uuid)) {
-            id = R.string.profile_handsfree_ag;
-        } else if (LocalBluetoothUuid.isHeadset(uuid)) {
-            id = R.string.profile_headset;
-        } else if (LocalBluetoothUuid.isHspAg(uuid)) {
-            id = R.string.profile_hsp_ag;
-        } else if (LocalBluetoothUuid.isOpp(uuid)) {
-            id = R.string.profile_opp;
-        } else if (LocalBluetoothUuid.isAvrcpController(uuid)) {
-            id = R.string.profile_avrcp_controller;
-        } else if (LocalBluetoothUuid.isAvrcpTarget(uuid)) {
-            id = R.string.profile_avrcp_target;
-        } else if (LocalBluetoothUuid.isInputDevice(uuid)) {
-            id = R.string.profile_input_device;
-        } else if (LocalBluetoothUuid.isPanu(uuid)) {
-            id = R.string.profile_panu;
-        } else if (LocalBluetoothUuid.isNap(uuid)) {
-            id = R.string.profile_nap;
-        } else if (LocalBluetoothUuid.isBnep(uuid)) {
-            id = R.string.profile_bnep;
-        } else if (LocalBluetoothUuid.isMap(uuid)) {
-            id = R.string.profile_map;
-        } else if (LocalBluetoothUuid.isMns(uuid)) {
-            id = R.string.profile_mns;
-        } else if (LocalBluetoothUuid.isMas(uuid)) {
-            id = R.string.profile_mas;
-        } else if (LocalBluetoothUuid.isSap(uuid)) {
-            id = R.string.profile_sap;
-        } else if (LocalBluetoothUuid.isPbapClient(uuid)) {
-            id = R.string.profile_pbap_client;
-        } else if (LocalBluetoothUuid.isPbapServer(uuid)) {
-            id = R.string.profile_pbap_server;
-        } else {
-            id = R.string.unknown;
-        }
-
-        return getResources().getString(id);
     }
 
     private void addPreference(int drawable, int title, int summary) {

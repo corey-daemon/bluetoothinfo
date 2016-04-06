@@ -36,6 +36,7 @@
   <string name="profile_handsfree">Handsfree</string>
   <string name="profile_handsfree_ag">Handsfree Audio Gateway</string>
   <string name="profile_headset">Headset</string>
+  <string name="profile_hogp">HOGP</string>
   <string name="profile_hsp_ag">Headset Audio Gateway</string>
   <string name="profile_avrcp_controller">AVRCP Controller</string>
   <string name="profile_avrcp_target">AVRCP Target</string>

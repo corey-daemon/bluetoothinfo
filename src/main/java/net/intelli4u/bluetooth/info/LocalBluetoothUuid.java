@@ -18,6 +18,8 @@ package net.intelli4u.bluetooth.info;
 
 import android.os.ParcelUuid;
 
+import java.util.HashMap;
+
 public class LocalBluetoothUuid {
     private static final String BLUETOOTH_UUID_CLASS = "android.bluetooth.BluetoothUuid";
 
@@ -66,10 +68,35 @@ public class LocalBluetoothUuid {
     private static final ParcelUuid HOGP =
             ParcelUuid.fromString("00001812-0000-1000-8000-00805f9b34fb");
 
-    private static Object mObject;
+    private static final Object mObject;
+    private static final HashMap<ParcelUuid, Integer> mUuid2Profile =
+            new HashMap<ParcelUuid, Integer> ();
 
     static {
         mObject = Reflect.forName(BLUETOOTH_UUID_CLASS);
+        
+        mUuid2Profile.put(BASE_UUID, R.string.profile_base_uuid);
+        mUuid2Profile.put(BNEP, R.string.profile_bnep);
+        mUuid2Profile.put(OBEX_OBJECT_PUSH, R.string.profile_opp);
+        mUuid2Profile.put(HSP, R.string.profile_headset);
+        mUuid2Profile.put(AUDIO_SOURCE, R.string.profile_audio_source);
+        mUuid2Profile.put(AUDIO_SINK, R.string.profile_audio_sink);
+        mUuid2Profile.put(AVRCP_TARGET, R.string.profile_avrcp_target);
+        mUuid2Profile.put(ADV_AUDIO_DIST, R.string.profile_adv_audio_dist);
+        mUuid2Profile.put(AVRCP_CONTROLLER, R.string.profile_avrcp_controller);
+        mUuid2Profile.put(HSP_AG, R.string.profile_hsp_ag);
+        mUuid2Profile.put(PANU, R.string.profile_panu);
+        mUuid2Profile.put(NAP, R.string.profile_nap);
+        mUuid2Profile.put(HANDSFREE, R.string.profile_handsfree);
+        mUuid2Profile.put(HANDSFREE_AG, R.string.profile_handsfree_ag);
+        mUuid2Profile.put(HID, R.string.profile_input_device);
+        mUuid2Profile.put(SAP, R.string.profile_sap);
+        mUuid2Profile.put(PBAP_PCE, R.string.profile_pbap_client);
+        mUuid2Profile.put(PBAP_PSE, R.string.profile_pbap_server);
+        mUuid2Profile.put(MAS, R.string.profile_mas);
+        mUuid2Profile.put(MNS, R.string.profile_mns);
+        mUuid2Profile.put(MAP, R.string.profile_map);
+        mUuid2Profile.put(HOGP, R.string.profile_hogp);
     }
 
     private static boolean hasProfile(ParcelUuid uuid, String methodName) {
@@ -81,6 +108,14 @@ public class LocalBluetoothUuid {
             return false;
         }
     }
+
+    public static int getProfileResId(ParcelUuid uuid) {
+        if (mUuid2Profile.containsKey(uuid)) {
+            return mUuid2Profile.get(uuid);
+        } else {
+            return R.string.unknown;
+        }
+    } 
 
     public static boolean isBaseUuid(ParcelUuid uuid) {
         return BASE_UUID.equals(uuid);
