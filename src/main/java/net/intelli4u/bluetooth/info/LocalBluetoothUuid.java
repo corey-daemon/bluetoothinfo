@@ -22,17 +22,49 @@ public class LocalBluetoothUuid {
     private static final String BLUETOOTH_UUID_CLASS = "android.bluetooth.BluetoothUuid";
 
     private static final ParcelUuid BASE_UUID =
-            ParcelUuid.fromString("00000000-0000-1000-8000-00805F9B34FB");
-    private static final ParcelUuid HANDSFREE_AG =
-            ParcelUuid.fromString("0000111F-0000-1000-8000-00805F9B34FB");
-    private static final ParcelUuid HSP_AG =
-            ParcelUuid.fromString("00001112-0000-1000-8000-00805F9B34FB");
-    private static final ParcelUuid PBAP_PCE =
-            ParcelUuid.fromString("0000112e-0000-1000-8000-00805F9B34FB");
-    private static final ParcelUuid PBAP_PSE =
-            ParcelUuid.fromString("0000112f-0000-1000-8000-00805F9B34FB");
+            ParcelUuid.fromString("00000000-0000-1000-8000-00805f9b34fb");
+    private static final ParcelUuid BNEP =
+            ParcelUuid.fromString("0000000f-0000-1000-8000-00805f9b34fb");
     private static final ParcelUuid OBEX_OBJECT_PUSH =
             ParcelUuid.fromString("00001105-0000-1000-8000-00805f9b34fb");
+    private static final ParcelUuid HSP =
+            ParcelUuid.fromString("00001108-0000-1000-8000-00805f9b34fb");
+    private static final ParcelUuid AUDIO_SOURCE =
+            ParcelUuid.fromString("0000110a-0000-1000-8000-00805f9b34fb");
+    private static final ParcelUuid AUDIO_SINK =
+            ParcelUuid.fromString("0000110b-0000-1000-8000-00805f9b34fb");
+    private static final ParcelUuid AVRCP_TARGET =
+            ParcelUuid.fromString("0000110c-0000-1000-8000-00805f9b34fb");
+    private static final ParcelUuid ADV_AUDIO_DIST =
+            ParcelUuid.fromString("0000110d-0000-1000-8000-00805f9b34fb");
+    private static final ParcelUuid AVRCP_CONTROLLER = 
+            ParcelUuid.fromString("0000110e-0000-1000-8000-00805f9b34fb");
+    private static final ParcelUuid HSP_AG =
+            ParcelUuid.fromString("00001112-0000-1000-8000-00805f9b34fb");
+    private static final ParcelUuid PANU =
+            ParcelUuid.fromString("00001115-0000-1000-8000-00805f9b34fb");
+    private static final ParcelUuid NAP =
+            ParcelUuid.fromString("00001116-0000-1000-8000-00805f9b34fb");
+    private static final ParcelUuid HANDSFREE =
+            ParcelUuid.fromString("0000111e-0000-1000-8000-00805f9b34fb");
+    private static final ParcelUuid HANDSFREE_AG =
+            ParcelUuid.fromString("0000111f-0000-1000-8000-00805f9b34fb");
+    private static final ParcelUuid HID =
+            ParcelUuid.fromString("00001124-0000-1000-8000-00805f9b34fb");
+    private static final ParcelUuid SAP =
+            ParcelUuid.fromString("0000112d-0000-1000-8000-00805f9b34fb");
+    private static final ParcelUuid PBAP_PCE =
+            ParcelUuid.fromString("0000112e-0000-1000-8000-00805f9b34fb");
+    private static final ParcelUuid PBAP_PSE =
+            ParcelUuid.fromString("0000112f-0000-1000-8000-00805f9b34fb");
+    private static final ParcelUuid MAS =
+            ParcelUuid.fromString("00001132-0000-1000-8000-00805f9b34fb");
+    private static final ParcelUuid MNS =
+            ParcelUuid.fromString("00001133-0000-1000-8000-00805f9b34fb");
+    private static final ParcelUuid MAP =
+            ParcelUuid.fromString("00001134-0000-1000-8000-00805f9b34fb");
+    private static final ParcelUuid HOGP =
+            ParcelUuid.fromString("00001812-0000-1000-8000-00805f9b34fb");
 
     private static Object mObject;
 
@@ -67,19 +99,19 @@ public class LocalBluetoothUuid {
     }
 
     public static boolean isAudioSource(ParcelUuid uuid) {
-        return hasProfile(uuid, "isAudioSource");
+        return hasProfile(uuid, "isAudioSource") || AUDIO_SOURCE.equals(uuid);
     }
 
     public static boolean isAudioSink(ParcelUuid uuid) {
-        return hasProfile(uuid, "isAudioSink");
+        return hasProfile(uuid, "isAudioSink") || AUDIO_SINK.equals(uuid);
     }
 
     public static boolean isAdvAudioDist(ParcelUuid uuid) {
-        return hasProfile(uuid, "isAdvAudioDist");
+        return hasProfile(uuid, "isAdvAudioDist") || ADV_AUDIO_DIST.equals(uuid);
     }
 
     public static boolean isHandsfree(ParcelUuid uuid) {
-        return hasProfile(uuid, "isHandsfree");
+        return hasProfile(uuid, "isHandsfree") || HANDSFREE.equals(uuid);
     }
 
     public static boolean isHandsfreeAg(ParcelUuid uuid) {
@@ -87,7 +119,7 @@ public class LocalBluetoothUuid {
     }
 
     public static boolean isHeadset(ParcelUuid uuid) {
-        return hasProfile(uuid, "isHeadset");
+        return hasProfile(uuid, "isHeadset") || HSP.equals(uuid);
     }
 
     public static boolean isHspAg(ParcelUuid uuid) {
@@ -95,11 +127,11 @@ public class LocalBluetoothUuid {
     }
 
     public static boolean isAvrcpController(ParcelUuid uuid) {
-        return hasProfile(uuid, "isAvrcpController");
+        return hasProfile(uuid, "isAvrcpController") || AVRCP_CONTROLLER.equals(uuid);
     }
 
     public static boolean isAvrcpTarget(ParcelUuid uuid) {
-        return hasProfile(uuid, "isAvrcpTarget");
+        return hasProfile(uuid, "isAvrcpTarget") || AVRCP_TARGET.equals(uuid);
     }
 
     public static boolean isInputDevice(ParcelUuid uuid) {
@@ -107,30 +139,34 @@ public class LocalBluetoothUuid {
     }
 
     public static boolean isPanu(ParcelUuid uuid) {
-        return hasProfile(uuid, "isPanu");
+        return hasProfile(uuid, "isPanu") || PANU.equals(uuid);
     }
 
     public static boolean isNap(ParcelUuid uuid) {
-        return hasProfile(uuid, "isNap");
+        return hasProfile(uuid, "isNap") || NAP.equals(uuid);
     }
 
     public static boolean isBnep(ParcelUuid uuid) {
-        return hasProfile(uuid, "isBnep");
+        return hasProfile(uuid, "isBnep") || BNEP.equals(uuid);
+    }
+
+    public static boolean isHogp(ParcelUuid uuid) {
+        return HOGP.equals(uuid);
     }
 
     public static boolean isMap(ParcelUuid uuid) {
-        return hasProfile(uuid, "isMap");
+        return hasProfile(uuid, "isMap") || MAP.equals(uuid);
     }
 
     public static boolean isMns(ParcelUuid uuid) {
-        return hasProfile(uuid, "isMns");
+        return hasProfile(uuid, "isMns") || MNS.equals(uuid);
     }
 
     public static boolean isMas(ParcelUuid uuid) {
-        return hasProfile(uuid, "isMas");
+        return hasProfile(uuid, "isMas") || MAS.equals(uuid);
     }
 
     public static boolean isSap(ParcelUuid uuid) {
-        return hasProfile(uuid, "isSap");
+        return hasProfile(uuid, "isSap") || SAP.equals(uuid);
     }
 }
