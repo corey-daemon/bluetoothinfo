@@ -52,12 +52,23 @@
   <string name="profile_pbap_server">PBAP Server</string>
   <string name="profile_sap">SAP</string>
 
+  <string name="service_limited_discoverability">Limited discoverability</string>
+  <string name="service_positioning">Positioning</string>
+  <string name="service_networking">Networking</string>
+  <string name="service_render">Render</string>
+  <string name="service_capture">Capture</string>
+  <string name="service_object_transfer">Object Transfer</string>
+  <string name="service_audio">Audio</string>
+  <string name="service_telephony">Telephony</string>
+  <string name="service_information">Information</string>
+
   <string name="device_name">Name</string>
   <string name="device_alias">Alias</string>
   <string name="device_address">Address</string>
   <string name="device_type">Type</string>
   <string name="device_uuid">UUID</string>
   <string name="device_class">Class</string>
+  <string name="device_service">Service</string>
 
   <string name="class_major">MAJOR CLASS</string>
   <string name="class_major_misc">Misc</string>

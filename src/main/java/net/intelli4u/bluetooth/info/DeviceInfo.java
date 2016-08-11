@@ -26,10 +26,25 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceGroup;
 import android.util.Log;
+import android.util.SparseIntArray;
 
 public class DeviceInfo extends PreferenceActivity {
-
     private static final String TAG = "DeviceInfo";
+
+    private static final SparseIntArray SERVICE = new SparseIntArray();
+
+    static {
+        SERVICE.put(BluetoothClass.Service.LIMITED_DISCOVERABILITY,
+                R.string.service_limited_discoverability);
+        SERVICE.put(BluetoothClass.Service.POSITIONING, R.string.service_positioning);
+        SERVICE.put(BluetoothClass.Service.NETWORKING, R.string.service_networking);
+        SERVICE.put(BluetoothClass.Service.RENDER, R.string.service_render);
+        SERVICE.put(BluetoothClass.Service.CAPTURE, R.string.service_capture);
+        SERVICE.put(BluetoothClass.Service.OBJECT_TRANSFER, R.string.service_object_transfer);
+        SERVICE.put(BluetoothClass.Service.AUDIO, R.string.service_audio);
+        SERVICE.put(BluetoothClass.Service.TELEPHONY, R.string.service_telephony);
+        SERVICE.put(BluetoothClass.Service.INFORMATION, R.string.service_information);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +64,28 @@ public class DeviceInfo extends PreferenceActivity {
             addPreference(-1, R.string.device_type, R.array.device_type, device.getType());
 
             handleBluetoothClass(wrapper);
+            handleBluetoothService(wrapper);
             handleBluetoothUuids(wrapper);
+        }
+    }
+
+    private void handleBluetoothService(final LocalBluetoothDevice wrapper) {
+        BluetoothClass bluetoothClass = wrapper.getBluetoothClass();
+        if (bluetoothClass != null) {
+            final PreferenceGroup preference = new PreferenceCategory(this);
+
+            preference.setTitle(R.string.device_service);
+            preference.setEnabled(true);
+            getPreferenceScreen().addPreference(preference);       
+
+            for (int i = 0; i < SERVICE.size(); i++) {
+                int service = SERVICE.keyAt(i);
+                if (bluetoothClass.hasService(service)) {
+                    addPreference(preference, -1,
+                            getResources().getString(SERVICE.valueAt(i)),
+                            "0x" + Integer.toHexString(service));
+                }                         
+            }
         }
     }
 
