@@ -370,7 +370,7 @@ public class DeviceInfo extends PreferenceActivity {
         preference.setTitle(title);
         preference.setSummary(summary);
 
-        if (drawable != -1) {
+        if (drawable > 0) {
             preference.setIcon(drawable);
         }
 

@@ -74,10 +74,6 @@ public class DevicePreference extends Preference implements Preference.OnPrefere
 
         if (bluetoothClass != null) {
             switch (bluetoothClass.getMajorDeviceClass()) {
-            case BluetoothClass.Device.Major.COMPUTER:
-                return R.drawable.ic_bt_laptop;
-            case BluetoothClass.Device.Major.PHONE:
-                return R.drawable.ic_bt_cellphone;
             case BluetoothClass.Device.Major.PERIPHERAL:
                 int deviceClass = bluetoothClass.getDeviceClass();
                 if (deviceClass == LocalBluetoothClass.PERIPHERAL_KEYBOARD
@@ -88,8 +84,6 @@ public class DevicePreference extends Preference implements Preference.OnPrefere
                 } else {
                     return R.drawable.ic_bt_misc_hid;
                 }
-            case BluetoothClass.Device.Major.IMAGING:
-                return R.drawable.ic_bt_imaging;
             default:
                 break;
             }
@@ -101,6 +95,6 @@ public class DevicePreference extends Preference implements Preference.OnPrefere
             }
         }
 
-        return 0;
+        return getBluetoothMajorClassDrawable(wrapper);
     }
 }
