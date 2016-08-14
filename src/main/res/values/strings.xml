@@ -70,7 +70,7 @@
   <string name="device_class">Class</string>
   <string name="device_service">Service</string>
 
-  <string name="class_major">MAJOR CLASS</string>
+  <string name="class_major">MAJOR</string>
   <string name="class_major_misc">Misc</string>
   <string name="class_major_computer">Computer</string>
   <string name="class_major_cellphone">Cell Phone</string>
@@ -83,7 +83,7 @@
   <string name="class_major_health">Health</string>
   <string name="class_major_uncategorized">Uncategorized</string>
 
-  <string name="class_device">DEVICE CLASS</string>
+  <string name="class_device">DEVICE</string>
   <string name="class_device_misc">Misc</string>
   <string name="class_device_uncategorized">Uncategorized</string>
 

@@ -76,7 +76,7 @@ public class DeviceInfo extends PreferenceActivity {
 
             preference.setTitle(R.string.device_service);
             preference.setEnabled(true);
-            getPreferenceScreen().addPreference(preference);       
+            getPreferenceScreen().addPreference(preference);
 
             for (int i = 0; i < SERVICE.size(); i++) {
                 int service = SERVICE.keyAt(i);
@@ -84,7 +84,7 @@ public class DeviceInfo extends PreferenceActivity {
                     addPreference(preference, -1,
                             getResources().getString(SERVICE.valueAt(i)),
                             "0x" + Integer.toHexString(service));
-                }                         
+                }
             }
         }
     }
@@ -92,7 +92,14 @@ public class DeviceInfo extends PreferenceActivity {
     private void handleBluetoothClass(final LocalBluetoothDevice wrapper) {
         BluetoothClass bluetoothClass = wrapper.getBluetoothClass();
         if (bluetoothClass != null) {
-            addPreference(DevicePreference.getBluetoothClassDrawable(wrapper),
+            final PreferenceGroup preference = new PreferenceCategory(this);
+
+            preference.setTitle(R.string.device_class);
+            preference.setEnabled(true);
+            getPreferenceScreen().addPreference(preference);
+
+            addPreference(
+                    preference, DevicePreference.getBluetoothClassDrawable(wrapper),
                     R.string.device_class, "0x" + bluetoothClass.toString());
 
             int mainClassStr = -1;
@@ -305,7 +312,9 @@ public class DeviceInfo extends PreferenceActivity {
             }
 
             if (mainClassStr != -1) {
-                addPreference(DevicePreference.getBluetoothMajorClassDrawable(wrapper),
+                addPreference(
+                        preference,
+                        DevicePreference.getBluetoothMajorClassDrawable(wrapper),
                         R.string.class_major,
                         String.format("%s (0x%s)",
                                 getResources().getString(mainClassStr),
@@ -313,7 +322,9 @@ public class DeviceInfo extends PreferenceActivity {
             }
 
             if (deviceClassStr != -1) {
-                addPreference(DevicePreference.getBluetoothClassDrawable(wrapper),
+                addPreference(
+                        preference,
+                        DevicePreference.getBluetoothClassDrawable(wrapper),
                         R.string.class_device,
                         String.format("%s (0x%s)",
                                 getResources().getString(deviceClassStr),
@@ -360,6 +371,10 @@ public class DeviceInfo extends PreferenceActivity {
 
     private void addPreference(int drawable, String title, String summary) {
         addPreference(getPreferenceScreen(), drawable, title, summary);
+    }
+
+    private void addPreference(PreferenceGroup group, int drawable, int title, String summary) {
+        addPreference(group, drawable, getResources().getString(title), summary);
     }
 
     private void addPreference(PreferenceGroup group, int drawable, String title, String summary) {
