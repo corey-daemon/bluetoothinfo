@@ -12,12 +12,12 @@ buildscript {
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 22
+    compileSdkVersion 19
     buildToolsVersion "22.0.1"
 
-	defaultConfig {
-		targetSdkVersion 22
-	}
+    defaultConfig {
+        targetSdkVersion 19
+    }
 
     lintOptions {
         abortOnError false
