@@ -61,6 +61,8 @@ public class DevicePreference extends Preference implements Preference.OnPrefere
                 return R.drawable.ic_bt_cellphone;
             case BluetoothClass.Device.Major.IMAGING:
                 return R.drawable.ic_bt_imaging;
+            case BluetoothClass.Device.Major.NETWORKING:
+                return R.drawable.ic_bt_network_pan;
             default:
                 break;
             }
@@ -92,6 +94,9 @@ public class DevicePreference extends Preference implements Preference.OnPrefere
                 return R.drawable.ic_bt_headphones_a2dp;
             } else if (bluetoothClass.doesClassMatch(LocalBluetoothClass.PROFILE_HEADSET)) {
                 return R.drawable.ic_bt_headset_hfp;
+            } else if (bluetoothClass.doesClassMatch(LocalBluetoothClass.PROFILE_PANU) ||
+                    bluetoothClass.doesClassMatch(LocalBluetoothClass.PROFILE_NAP)) {
+                return R.drawable.ic_bt_network_pan;
             }
         }
 

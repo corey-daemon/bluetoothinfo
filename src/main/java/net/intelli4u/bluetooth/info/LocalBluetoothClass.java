@@ -21,6 +21,8 @@ import android.bluetooth.BluetoothClass;
 public class LocalBluetoothClass {
     public static final int PROFILE_A2DP;
     public static final int PROFILE_HEADSET;
+    public static final int PROFILE_PANU;
+    public static final int PROFILE_NAP;
     public static final int PERIPHERAL_KEYBOARD;
     public static final int PERIPHERAL_KEYBOARD_POINTING;
     public static final int PERIPHERAL_POINTING;
@@ -28,6 +30,9 @@ public class LocalBluetoothClass {
     static {
         PROFILE_A2DP = Reflect.getInt(BluetoothClass.class, "PROFILE_A2DP");
         PROFILE_HEADSET = Reflect.getInt(BluetoothClass.class, "PROFILE_HEADSET");
+        PROFILE_PANU = Reflect.getInt(BluetoothClass.class, "PROFILE_PANU");
+        PROFILE_NAP = Reflect.getInt(BluetoothClass.class, "PROFILE_NAP");
+
         PERIPHERAL_KEYBOARD = Reflect.getInt(BluetoothClass.Device.class, "PERIPHERAL_KEYBOARD");
         PERIPHERAL_KEYBOARD_POINTING = Reflect.getInt(BluetoothClass.Device.class,
                 "PERIPHERAL_KEYBOARD_POINTING");
