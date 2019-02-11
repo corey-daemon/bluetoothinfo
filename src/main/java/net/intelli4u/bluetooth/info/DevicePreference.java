@@ -96,10 +96,10 @@ public class DevicePreference extends Preference implements Preference.OnPrefere
                 return R.drawable.ic_bt_headphones_a2dp;
             } else if (bluetoothClass.doesClassMatch(LocalBluetoothClass.PROFILE_HEADSET)) {
                 return R.drawable.ic_bt_headset_hfp;
-            } else if (bluetoothClass.doesClassMatch(LocalBluetoothClass.PROFILE_PANU) ||
+            } /* else if (bluetoothClass.doesClassMatch(LocalBluetoothClass.PROFILE_PANU) ||
                     bluetoothClass.doesClassMatch(LocalBluetoothClass.PROFILE_NAP)) {
                 return R.drawable.ic_bt_network_pan;
-            }
+            } */
         }
 
         return getBluetoothMajorClassDrawable(wrapper);
