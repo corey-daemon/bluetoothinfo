@@ -63,6 +63,8 @@ public class DevicePreference extends Preference implements Preference.OnPrefere
                 return R.drawable.ic_bt_imaging;
             case BluetoothClass.Device.Major.NETWORKING:
                 return R.drawable.ic_bt_network_pan;
+            case BluetoothClass.Device.Major.AUDIO_VIDEO:
+                return R.drawable.ic_bt_headphones_a2dp;
             case BluetoothClass.Device.Major.PERIPHERAL:
                 return R.drawable.ic_bt_keyboard_hid;
             default:
